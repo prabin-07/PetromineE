@@ -73,9 +73,9 @@ INSERT INTO users (username, email, password, role) VALUES
 
 -- Insert sample fuel stations
 INSERT INTO fuel_stations (owner_id, name, address, latitude, longitude, phone) VALUES
-(1, 'Shell Station Downtown', '123 Main Street, Downtown', 40.7128, -74.0060, '+1-555-0101'),
-(1, 'BP Express Highway', '456 Highway Road, Suburb', 40.7589, -73.9851, '+1-555-0102'),
-(1, 'Exxon City Center', '789 Center Ave, City', 40.7831, -73.9712, '+1-555-0103');
+(1, 'IndianOil - MG Road Kochi', 'MG Road, Kochi, Kerala', 9.9312, 76.2673, '+91-484-000-0101'),
+(1, 'BPCL - Vyttila Mobility Hub', 'Vyttila, Kochi, Kerala', 9.9676, 76.3181, '+91-484-000-0102'),
+(1, 'HP - Technopark Trivandrum', 'Technopark, Thiruvananthapuram, Kerala', 8.5596, 76.8798, '+91-471-000-0103');
 
 -- Insert sample fuel prices (in Indian Rupees per liter)
 INSERT INTO fuel_prices (station_id, fuel_type, price) VALUES

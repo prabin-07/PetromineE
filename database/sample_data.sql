@@ -24,9 +24,9 @@ UPDATE fuel_stations SET owner_id = 9 WHERE id = 3; -- Exxon owner
 
 -- Insert additional fuel stations
 INSERT INTO fuel_stations (owner_id, name, address, latitude, longitude, phone) VALUES
-(7, 'Shell Station Uptown', '321 Uptown Boulevard, North District', 40.7505, -73.9934, '+1-555-0104'),
-(7, 'Shell Express Mall Road', '654 Mall Road, Shopping District', 40.7282, -74.0776, '+1-555-0105'),
-(8, 'BP Station Riverside', '987 Riverside Drive, Riverside', 40.8176, -73.9482, '+1-555-0106'),
+(7, 'IndianOil - Calicut Bypass', 'NH66 Bypass, Kozhikode, Kerala', 11.2588, 75.7804, '+91-495-000-0104'),
+(7, 'BPCL - Lulu Mall Kochi', 'Edappally, Kochi, Kerala', 10.0280, 76.3083, '+91-484-000-0105'),
+(8, 'HP - Marine Drive Ernakulam', 'Marine Drive, Ernakulam, Kerala', 9.9820, 76.2800, '+91-484-000-0106'),
 (8, 'BP Quick Stop Airport', '147 Airport Road, Terminal Area', 40.6892, -74.1745, '+1-555-0107'),
 (9, 'Exxon Station Westside', '258 West Avenue, Westside', 40.7614, -73.9776, '+1-555-0108'),
 (10, 'Chevron Downtown Plaza', '369 Plaza Street, Downtown', 40.7484, -73.9857, '+1-555-0109'),

@@ -197,7 +197,7 @@ function createPurchaseCard(purchase) {
         <div class="fuel-prices">
             <div class="fuel-price">
                 <div class="fuel-type">${purchase.fuel_type}</div>
-                <div class="price">$${purchase.locked_price}</div>
+                <div class="price">₹${purchase.locked_price}</div>
             </div>
             <div class="fuel-price">
                 <div class="fuel-type">Quantity</div>

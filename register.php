@@ -172,7 +172,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="form-group">
                     <label>
                         <input type="checkbox" id="terms" required style="margin-right: 8px;">
-                        I agree to the <a href="#" style="color: #667eea;">Terms of Service</a> and <a href="#" style="color: #667eea;">Privacy Policy</a>
+                        I agree to the <a href="#" class="link-primary">Terms of Service</a> and <a href="#" class="link-primary">Privacy Policy</a>
                     </label>
                 </div>
                 
@@ -182,7 +182,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </form>
             
             <p style="text-align: center; margin-top: 1rem;">
-                Already have an account? <a href="login.php" style="color: #667eea;">Login here</a>
+                Already have an account? <a href="login.php" class="link-primary">Login here</a>
             </p>
         </div>
     </main>

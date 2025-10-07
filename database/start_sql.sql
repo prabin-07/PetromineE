@@ -205,19 +205,19 @@ CREATE TABLE `fuel_stations` (
 --
 
 INSERT INTO `fuel_stations` (`id`, `owner_id`, `name`, `address`, `latitude`, `longitude`, `phone`, `is_active`, `created_at`, `updated_at`) VALUES
-(1, 7, 'Shell Station Downtown', '123 Main Street, Downtown', 40.71280000, -74.00600000, '+1-555-0101', 1, '2025-09-29 05:02:50', '2025-09-29 05:07:50'),
-(2, 8, 'BP Express Highway', '456 Highway Road, Suburb', 40.75890000, -73.98510000, '+1-555-0102', 1, '2025-09-29 05:02:50', '2025-09-29 05:07:50'),
-(3, 9, 'Exxon City Center', '789 Center Ave, City', 40.78310000, -73.97120000, '+1-555-0103', 1, '2025-09-29 05:02:50', '2025-09-29 05:07:50'),
-(4, 7, 'Shell Station Uptown', '321 Uptown Boulevard, North District', 40.75050000, -73.99340000, '+1-555-0104', 1, '2025-09-29 05:07:50', '2025-09-29 05:07:50'),
-(5, 7, 'Shell Express Mall Road', '654 Mall Road, Shopping District', 40.72820000, -74.07760000, '+1-555-0105', 1, '2025-09-29 05:07:50', '2025-09-29 05:07:50'),
-(6, 8, 'BP Station Riverside', '987 Riverside Drive, Riverside', 40.81760000, -73.94820000, '+1-555-0106', 1, '2025-09-29 05:07:50', '2025-09-29 05:07:50'),
-(7, 8, 'BP Quick Stop Airport', '147 Airport Road, Terminal Area', 40.68920000, -74.17450000, '+1-555-0107', 1, '2025-09-29 05:07:50', '2025-09-29 05:07:50'),
-(8, 9, 'Exxon Station Westside', '258 West Avenue, Westside', 40.76140000, -73.97760000, '+1-555-0108', 1, '2025-09-29 05:07:50', '2025-09-29 05:07:50'),
-(9, 10, 'Chevron Downtown Plaza', '369 Plaza Street, Downtown', 40.74840000, -73.98570000, '+1-555-0109', 1, '2025-09-29 05:07:50', '2025-09-29 05:07:50'),
-(10, 10, 'Chevron Highway Junction', '741 Highway Junction, Suburb East', 40.72820000, -73.79490000, '+1-555-0110', 1, '2025-09-29 05:07:50', '2025-09-29 05:07:50'),
-(11, 11, 'Texaco City Center', '852 City Center Ave, Midtown', 40.75490000, -73.98400000, '+1-555-0111', 1, '2025-09-29 05:07:50', '2025-09-29 05:07:50'),
-(12, 11, 'Texaco Express Lane', '963 Express Lane, Industrial Area', 40.67820000, -73.94420000, '+1-555-0112', 1, '2025-09-29 05:07:50', '2025-09-29 05:07:50'),
-(13, 7, 'Shell 24/7 Station', '159 Night Owl Street, Late District', 40.71280000, -74.00600000, '+1-555-0113', 1, '2025-09-29 05:07:50', '2025-09-29 05:07:50');
+(1, 7, 'IndianOil - MG Road Kochi', 'MG Road, Kochi, Kerala', 9.93120000, 76.26730000, '+91-484-000-0101', 1, '2025-09-29 05:02:50', '2025-09-29 05:07:50'),
+(2, 8, 'BPCL - Vyttila Mobility Hub', 'Vyttila, Kochi, Kerala', 9.96760000, 76.31810000, '+91-484-000-0102', 1, '2025-09-29 05:02:50', '2025-09-29 05:07:50'),
+(3, 9, 'HP - Technopark Trivandrum', 'Technopark, Thiruvananthapuram, Kerala', 8.55960000, 76.87980000, '+91-471-000-0103', 1, '2025-09-29 05:02:50', '2025-09-29 05:07:50'),
+(4, 7, 'IndianOil - Palayam Trivandrum', 'Palayam, Thiruvananthapuram, Kerala', 8.52410000, 76.93660000, '+91-471-000-0104', 1, '2025-09-29 05:07:50', '2025-09-29 05:07:50'),
+(5, 7, 'BPCL - Edappally Kochi', 'Edappally, Kochi, Kerala', 10.02800000, 76.30830000, '+91-484-000-0105', 1, '2025-09-29 05:07:50', '2025-09-29 05:07:50'),
+(6, 8, 'HP - Marine Drive Ernakulam', 'Marine Drive, Ernakulam, Kerala', 9.98200000, 76.28000000, '+91-484-000-0106', 1, '2025-09-29 05:07:50', '2025-09-29 05:07:50'),
+(7, 8, 'BPCL - Cochin Intl Airport', 'CIAL, Nedumbassery, Kerala', 10.15180000, 76.40190000, '+91-484-000-0107', 1, '2025-09-29 05:07:50', '2025-09-29 05:07:50'),
+(8, 9, 'IndianOil - Calicut Beach', 'Beach Rd, Kozhikode, Kerala', 11.25880000, 75.78040000, '+91-495-000-0108', 1, '2025-09-29 05:07:50', '2025-09-29 05:07:50'),
+(9, 10, 'HP - Thrissur Swaraj Round', 'Swaraj Round, Thrissur, Kerala', 10.52760000, 76.21440000, '+91-487-000-0109', 1, '2025-09-29 05:07:50', '2025-09-29 05:07:50'),
+(10, 10, 'IndianOil - Aluva Metro', 'Aluva, Kochi, Kerala', 10.10960000, 76.35160000, '+91-484-000-0110', 1, '2025-09-29 05:07:50', '2025-09-29 05:07:50'),
+(11, 11, 'BPCL - Kollam Chinnakada', 'Chinnakada, Kollam, Kerala', 8.89320000, 76.61410000, '+91-474-000-0111', 1, '2025-09-29 05:07:50', '2025-09-29 05:07:50'),
+(12, 11, 'HP - Palakkad Town', 'Stadium Bypass Rd, Palakkad, Kerala', 10.78670000, 76.65480000, '+91-491-000-0112', 1, '2025-09-29 05:07:50', '2025-09-29 05:07:50'),
+(13, 7, 'IndianOil - Kochi 24/7', 'Banerji Rd, Ernakulam, Kerala', 9.98160000, 76.28510000, '+91-484-000-0113', 1, '2025-09-29 05:07:50', '2025-09-29 05:07:50');
 
 -- --------------------------------------------------------
 
@@ -287,17 +287,17 @@ CREATE TABLE `station_services` (
 --
 
 INSERT INTO `station_services` (`id`, `station_id`, `service_name`, `is_available`, `price`, `description`, `created_at`) VALUES
-(1, 1, 'Engine Oil Change', 1, 29.99, 'Full synthetic oil change service', '2025-09-29 05:02:50'),
-(2, 1, 'Nitrogen Air Fill', 1, 5.00, 'Nitrogen tire inflation service', '2025-09-29 05:02:50'),
-(3, 1, 'Car Wash', 1, 15.00, 'Basic car wash service', '2025-09-29 05:02:50'),
-(4, 2, 'Engine Oil Change', 1, 27.99, 'Conventional oil change service', '2025-09-29 05:02:50'),
-(5, 2, 'Nitrogen Air Fill', 1, 4.50, 'Nitrogen tire inflation service', '2025-09-29 05:02:50'),
-(6, 3, 'Engine Oil Change', 1, 32.99, 'Premium oil change service', '2025-09-29 05:02:50'),
-(7, 3, 'Nitrogen Air Fill', 1, 5.50, 'Nitrogen tire inflation service', '2025-09-29 05:02:50'),
-(8, 3, 'Tire Pressure Check', 1, 0.00, 'Free tire pressure check', '2025-09-29 05:02:50'),
-(9, 1, 'Engine Oil Change', 1, 29.99, 'Full synthetic oil change service', '2025-09-29 05:07:50'),
-(10, 1, 'Nitrogen Air Fill', 1, 5.00, 'Nitrogen tire inflation service', '2025-09-29 05:07:50'),
-(11, 1, 'Car Wash', 1, 15.00, 'Basic car wash service', '2025-09-29 05:07:50'),
+(1, 1, 'Air Filling', 1, 0.00, 'Free tire air filling service', '2025-09-29 05:02:50'),
+(2, 1, 'Restrooms', 1, 0.00, 'Clean restroom facilities', '2025-09-29 05:02:50'),
+(3, 1, 'Air Filling', 1, 0.00, 'Free tire air filling service', '2025-09-29 05:02:50'),
+(4, 2, 'Restrooms', 1, 0.00, 'Clean restroom facilities', '2025-09-29 05:02:50'),
+(5, 2, 'Air Filling', 1, 0.00, 'Free tire air filling service', '2025-09-29 05:02:50'),
+(6, 3, 'Restrooms', 1, 0.00, 'Clean restroom facilities', '2025-09-29 05:02:50'),
+(7, 3, 'Air Filling', 1, 0.00, 'Free tire air filling service', '2025-09-29 05:02:50'),
+(8, 3, 'Air Filling', 1, 0.00, 'Free tire air filling service', '2025-09-29 05:02:50'),
+(9, 1, 'Air Filling', 1, 0.00, 'Free tire air filling service', '2025-09-29 05:07:50'),
+(10, 1, 'Restrooms', 1, 0.00, 'Clean restroom facilities', '2025-09-29 05:07:50'),
+(11, 1, 'Air Filling', 1, 0.00, 'Free tire air filling service', '2025-09-29 05:07:50'),
 (12, 1, 'Tire Pressure Check', 1, 0.00, 'Free tire pressure check', '2025-09-29 05:07:50'),
 (13, 1, 'Windshield Cleaning', 1, 0.00, 'Complimentary windshield cleaning', '2025-09-29 05:07:50'),
 (14, 1, 'ATM Service', 1, 0.00, 'On-site ATM available', '2025-09-29 05:07:50'),

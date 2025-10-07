@@ -3,6 +3,13 @@ require_once 'includes/session.php';
 require_once 'config/database.php';
 require_once 'includes/auth.php';
 
+// Require login for accessing the main pages
+if (!isLoggedIn()) {
+    $redirect = urlencode($_SERVER['REQUEST_URI'] ?? 'index.php');
+    header('Location: login.php?redirect=' . $redirect);
+    exit();
+}
+
 // Handle logout message
 $logged_out = isset($_GET['logged_out']) && $_GET['logged_out'] === '1';
 ?>

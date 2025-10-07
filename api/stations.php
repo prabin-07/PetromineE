@@ -27,7 +27,9 @@ try {
         $serviceQuery = "
             SELECT service_name, is_available, price, description 
             FROM station_services 
-            WHERE station_id = :station_id AND is_available = 1
+            WHERE station_id = :station_id 
+              AND is_available = 1
+              AND service_name IN ('Air Filling', 'Restrooms')
         ";
         $serviceStmt = $db->prepare($serviceQuery);
         $serviceStmt->bindParam(':station_id', $station['id']);

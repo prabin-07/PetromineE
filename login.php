@@ -156,11 +156,11 @@ if (isset($_GET['registered']) && $_GET['registered'] === '1') {
             </form>
             
             <div style="text-align: center; margin: 1rem 0;">
-                <a href="forgot-password.php" style="color: #667eea; text-decoration: none;">Forgot Password?</a>
+                <a href="forgot-password.php" class="link-primary">Forgot Password?</a>
             </div>
             
             <p style="text-align: center; margin-top: 1rem;">
-                Don't have an account? <a href="register.php" style="color: #667eea;">Register here</a>
+                Don't have an account? <a href="register.php" class="link-primary">Register here</a>
             </p>
             
             <!-- Demo Credentials Helper -->

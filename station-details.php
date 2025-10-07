@@ -3,6 +3,13 @@ require_once 'includes/session.php';
 require_once 'config/database.php';
 require_once 'includes/auth.php';
 
+// Require login to access station details
+if (!isLoggedIn()) {
+    $redirect = urlencode($_SERVER['REQUEST_URI'] ?? 'station-details.php');
+    header('Location: login.php?redirect=' . $redirect);
+    exit();
+}
+
 $station_id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 $error = '';
 $station = null;
@@ -53,6 +60,7 @@ try {
             SELECT service_name, is_available, price, description 
             FROM station_services 
             WHERE station_id = :station_id 
+              AND service_name IN ('Air Filling', 'Restrooms')
             ORDER BY is_available DESC, service_name ASC
         ";
         $serviceStmt = $db->prepare($serviceQuery);
@@ -102,7 +110,7 @@ function calculateDistance($lat1, $lon1, $lat2 = 40.7128, $lon2 = -74.0060) {
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         .station-hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #2ECC71 0%, #27AE60 100%);
             color: white;
             padding: 2rem 0;
         }
@@ -177,7 +185,7 @@ function calculateDistance($lat1, $lon1, $lat2 = 40.7128, $lon2 = -74.0060) {
         .current-price {
             font-size: 2rem;
             font-weight: 700;
-            color: #667eea;
+            color: #27AE60;
             margin-bottom: 0.5rem;
         }
         
@@ -198,7 +206,7 @@ function calculateDistance($lat1, $lon1, $lat2 = 40.7128, $lon2 = -74.0060) {
             padding: 1.5rem;
             border-radius: 12px;
             box-shadow: 0 3px 15px rgba(0,0,0,0.1);
-            border-left: 4px solid #667eea;
+            border-left: 4px solid #27AE60;
         }
         
         .service-card.unavailable {
@@ -488,7 +496,7 @@ function calculateDistance($lat1, $lon1, $lat2 = 40.7128, $lon2 = -74.0060) {
                     <div class="map-container">
                         <div class="mock-map">
                             <div>
-                                <i class="fas fa-map-marker-alt" style="font-size: 2rem; margin-bottom: 1rem; color: #667eea;"></i>
+                                <i class="fas fa-map-marker-alt" style="font-size: 2rem; margin-bottom: 1rem; color: #27AE60;"></i>
                                 <p>Interactive Map Coming Soon</p>
                                 <p style="font-size: 0.9rem; opacity: 0.7;">
                                     Coordinates: <?php echo $station['latitude']; ?>, <?php echo $station['longitude']; ?>
