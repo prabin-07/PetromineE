@@ -104,6 +104,7 @@ $stations = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <title>Manage Stations - Petromine</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link type="image/x-icon" rel="icon" href="assets/img/logo.png">
 </head>
 <body>
     <nav class="navbar">

@@ -37,11 +37,11 @@ function createStationCard(station) {
         <div class="fuel-prices">
             <div class="fuel-price">
                 <div class="fuel-type">Petrol</div>
-                <div class="price">₹${station.petrol_price}</div>
+                <div class="price">₹${station.petrol_price || 'N/A'}</div>
             </div>
             <div class="fuel-price">
                 <div class="fuel-type">Diesel</div>
-                <div class="price">₹${station.diesel_price}</div>
+                <div class="price">₹${station.diesel_price || 'N/A'}</div>
             </div>
         </div>
         <div class="services">

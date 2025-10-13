@@ -96,6 +96,7 @@ if (isset($_GET['registered']) && $_GET['registered'] === '1') {
     <title>Login - Petromine</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link type="image/x-icon" rel="icon" href="assets/img/logo.png">
 </head>
 <body>
     <nav class="navbar">
