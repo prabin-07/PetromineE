@@ -11,6 +11,7 @@ $user_role = $user['role'];
 
 // Handle access denied error
 $access_denied = isset($_GET['error']) && $_GET['error'] === 'access_denied';
+$admin_fuel_restriction = isset($_GET['error']) && $_GET['error'] === 'admin_no_fuel_purchase';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -29,7 +30,7 @@ $access_denied = isset($_GET['error']) && $_GET['error'] === 'access_denied';
                 <h2><i class="fas fa-gas-pump"></i> Petromine</h2>
             </div>
             <div class="nav-menu">
-                <a href="index.php" class="nav-link">Home</a>
+                <a href="index.php" class="nav-link"></a>
                 <?php if ($user_role == 'pump_owner'): ?>
                     <a href="manage-station.php" class="nav-link">Manage Station</a>
                 <?php elseif ($user_role == 'admin'): ?>
@@ -49,6 +50,8 @@ $access_denied = isset($_GET['error']) && $_GET['error'] === 'access_denied';
                     <p>Welcome back, <?php echo htmlspecialchars($user['username']); ?>!</p>
                     <?php if ($access_denied): ?>
                         <div class="alert alert-error">Access denied. You don't have permission to access that page.</div>
+                    <?php elseif ($admin_fuel_restriction): ?>
+                        <div class="alert alert-error">Admin users are not allowed to purchase fuel. You can only manage the platform from the admin panel.</div>
                     <?php endif; ?>
                 </div>
 
@@ -153,6 +156,8 @@ $access_denied = isset($_GET['error']) && $_GET['error'] === 'access_denied';
             
             <?php if ($access_denied): ?>
             showToast('Access denied. You don\'t have permission to access that page.', 'error', 'Access Denied', 6000);
+            <?php elseif ($admin_fuel_restriction): ?>
+            showToast('Admin users are not allowed to purchase fuel. You can only manage the platform from the admin panel.', 'error', 'Access Restricted', 6000);
             <?php endif; ?>
         });
     </script>

@@ -51,9 +51,11 @@ function createStationCard(station) {
             </div>
         </div>
         <div class="station-actions">
-            <button class="btn btn-save" onclick="openSaveToBuy(${station.id})">
-                <i class="fas fa-lock"></i> Save to Buy
-            </button>
+            ${window.userRole !== 'admin' ? `
+                <button class="btn btn-save" onclick="openSaveToBuy(${station.id})">
+                    <i class="fas fa-lock"></i> Save to Buy
+                </button>
+            ` : ''}
             <button class="btn btn-info" onclick="viewStationDetails(${station.id})">
                 <i class="fas fa-info-circle"></i> Details
             </button>
@@ -75,6 +77,12 @@ function openSaveToBuy(stationId) {
                 window.location.href = 'login.php';
             }
         });
+        return;
+    }
+    
+    // Check if user is admin - admins cannot buy fuel
+    if (window.userRole === 'admin') {
+        showToast('Admin users are not allowed to purchase fuel. You can only manage the platform from the admin panel.', 'error', 'Access Restricted', 5000);
         return;
     }
     

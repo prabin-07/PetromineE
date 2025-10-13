@@ -10,6 +10,12 @@ if (!isLoggedIn()) {
     exit();
 }
 
+// Check if user is admin - admins cannot redeem fuel purchases
+if (hasRole('admin')) {
+    echo json_encode(['success' => false, 'message' => 'Admin users are not allowed to redeem fuel purchases']);
+    exit();
+}
+
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     echo json_encode(['success' => false, 'message' => 'Invalid request method']);
     exit();

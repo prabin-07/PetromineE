@@ -8,8 +8,13 @@ $success = '';
 
 // Check if user is already logged in
 if (isLoggedIn()) {
-    $redirect = isset($_GET['redirect']) ? $_GET['redirect'] : 'dashboard.php';
-    header('Location: ' . $redirect);
+    $current_user = getCurrentUser();
+    if ($current_user['role'] === 'admin') {
+        header('Location: dashboard.php'); // Always redirect admin to dashboard
+    } else {
+        $redirect = isset($_GET['redirect']) ? $_GET['redirect'] : 'dashboard.php';
+        header('Location: ' . $redirect);
+    }
     exit();
 }
 
@@ -63,8 +68,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $updateStmt->bindParam(':id', $user['id'], PDO::PARAM_INT);
                         $updateStmt->execute();
                         
-                        // Redirect to intended page or dashboard
-                        $redirect = isset($_GET['redirect']) ? $_GET['redirect'] : 'dashboard.php';
+                        // Redirect based on user role
+                        if ($user['role'] === 'admin') {
+                            $redirect = 'dashboard.php'; // Always redirect admin to dashboard
+                        } else {
+                            $redirect = isset($_GET['redirect']) ? $_GET['redirect'] : 'dashboard.php';
+                        }
                         header('Location: ' . $redirect);
                         exit();
                     } else {

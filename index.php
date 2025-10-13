@@ -10,6 +10,12 @@ if (!isLoggedIn()) {
     exit();
 }
 
+// Redirect admin users to admin dashboard
+if (hasRole('admin')) {
+    header('Location: admin.php');
+    exit();
+}
+
 // Handle logout message
 $logged_out = isset($_GET['logged_out']) && $_GET['logged_out'] === '1';
 ?>

@@ -6,6 +6,12 @@ require_once 'includes/auth.php';
 // Require login to access save-to-buy feature
 requireLogin();
 
+// Check if user is admin - admins cannot buy fuel
+if (hasRole('admin')) {
+    header('Location: dashboard.php?error=admin_no_fuel_purchase');
+    exit();
+}
+
 $station_id = isset($_GET['station_id']) ? (int)$_GET['station_id'] : 0;
 
 if (!$station_id) {

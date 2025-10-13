@@ -10,6 +10,12 @@ if (!isLoggedIn()) {
     exit();
 }
 
+// Check if user is admin - admins cannot access fuel purchase stats
+if (hasRole('admin')) {
+    echo json_encode(['error' => 'Admin users are not allowed to access fuel purchase statistics']);
+    exit();
+}
+
 try {
     $user_id = getCurrentUser()['id'];
     
