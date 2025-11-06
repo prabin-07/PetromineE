@@ -48,15 +48,7 @@ $logged_out = isset($_GET['logged_out']) && $_GET['logged_out'] === '1';
         </div>
     </nav>
 
-    <main class="main-content">
-        <?php if ($logged_out): ?>
-            <div class="container">
-                <div class="alert alert-success" style="margin: 20px 0;">
-                    <i class="fas fa-check-circle"></i> You have been successfully logged out.
-                </div>
-            </div>
-        <?php endif; ?>
-        
+    <main class="main-content">        
         <section class="hero">
             <div class="hero-content">
                 <h1>Real-time Fuel Prices at Your Fingertips</h1>
@@ -90,13 +82,5 @@ $logged_out = isset($_GET['logged_out']) && $_GET['logged_out'] === '1';
     </script>
     <script src="assets/js/alerts.js"></script>
     <script src="assets/js/main.js"></script>
-    
-    <?php if ($logged_out): ?>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            showToast('You have been successfully logged out. Thank you for using Petromine!', 'success', 'Logged Out', 5000);
-        });
-    </script>
-    <?php endif; ?>
 </body>
 </html>
