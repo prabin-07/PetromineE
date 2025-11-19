@@ -2,6 +2,8 @@
 require_once 'includes/session.php';
 require_once 'config/database.php';
 require_once 'includes/auth.php';
+$paymentConfig = require 'config/payment.php';
+$cashfreeMode = (($paymentConfig['cashfree']['env'] ?? 'sandbox') === 'production') ? 'production' : 'sandbox';
 
 // Require login to access dashboard
 requireLogin();
@@ -23,7 +25,7 @@ $admin_fuel_restriction = isset($_GET['error']) && $_GET['error'] === 'admin_no_
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link type="image/x-icon" rel="icon" href="assets/img/logo.png">
 </head>
-<body>
+<body data-cashfree-mode="<?php echo htmlspecialchars($cashfreeMode); ?>" data-payment-gateway="<?php echo htmlspecialchars($paymentConfig['default_gateway']); ?>">
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo">
@@ -132,9 +134,13 @@ $admin_fuel_restriction = isset($_GET['error']) && $_GET['error'] === 'admin_no_
     <script>
         window.userLoggedIn = true;
         window.userRole = '<?php echo $user_role; ?>';
+        window.paymentGateway = '<?php echo htmlspecialchars($paymentConfig['default_gateway']); ?>';
+        window.cashfreeMode = '<?php echo $cashfreeMode; ?>';
     </script>
-    <script src="assets/js/alerts.js"></script>
-    <script src="assets/js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="assets/js/alerts.js?v=<?php echo time(); ?>"></script>
+    <script src="https://sdk.cashfree.com/js/ui/2.0.0/cashfree.js"></script>
+    <script src="assets/js/main.js?v=<?php echo time(); ?>"></script>
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -159,6 +165,43 @@ $admin_fuel_restriction = isset($_GET['error']) && $_GET['error'] === 'admin_no_
             <?php elseif ($admin_fuel_restriction): ?>
             showToast('Admin users are not allowed to purchase fuel. You can only manage the platform from the admin panel.', 'error', 'Access Restricted', 6000);
             <?php endif; ?>
+            
+            // Handle payment status from callback
+            const urlParams = new URLSearchParams(window.location.search);
+            const paymentStatus = urlParams.get('payment');
+            const orderId = urlParams.get('order_id');
+            
+            if (paymentStatus === 'success' && orderId) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Payment Successful!',
+                    text: 'Your payment has been confirmed. Your order is being processed.',
+                    confirmButtonColor: '#27AE60'
+                }).then(() => {
+                    // Clean URL
+                    window.history.replaceState({}, document.title, window.location.pathname);
+                    loadSavedPurchases();
+                    loadUserStats();
+                });
+            } else if (paymentStatus === 'failed' && orderId) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Payment Failed',
+                    text: 'Your payment could not be processed. Please try again.',
+                    confirmButtonColor: '#dc3545'
+                }).then(() => {
+                    window.history.replaceState({}, document.title, window.location.pathname);
+                });
+            } else if (paymentStatus === 'pending' && orderId) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Payment Pending',
+                    text: 'Your payment is still being processed. Please wait a moment and refresh.',
+                    confirmButtonColor: '#ffc107'
+                }).then(() => {
+                    window.history.replaceState({}, document.title, window.location.pathname);
+                });
+            }
         });
     </script>
 </body>

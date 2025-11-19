@@ -230,6 +230,36 @@
     gap: 1rem;
 }
 
+.payment-method-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+}
+
+.payment-method-pill {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 0.9rem;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #eebbc3, #b8c1ec);
+    color: #232946;
+    font-weight: 600;
+    border: 2px solid transparent;
+    cursor: pointer;
+    user-select: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.payment-method-pill input[type="radio"] {
+    accent-color: #232946;
+}
+
+.payment-method-pill:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 15px rgba(35, 41, 70, 0.15);
+}
+
 	.btn-save {
 	   background: linear-gradient(135deg, var(--color-primary-start), var(--color-primary-end));
 	   color: var(--color-primary-contrast);

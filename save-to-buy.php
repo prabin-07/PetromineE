@@ -139,6 +139,7 @@ if (!$station) {
             const quantityInput = document.getElementById('quantity');
             const priceInput = document.getElementById('price');
             const totalSpan = document.getElementById('total');
+            const form = document.getElementById('saveToBuyForm');
             
             function updatePrice() {
                 const selectedOption = fuelTypeSelect.options[fuelTypeSelect.selectedIndex];
@@ -180,6 +181,8 @@ if (!$station) {
                     showToast('Large quantity selected. Make sure you have adequate storage!', 'warning', 'Notice', 4000);
                 }
             });
+
+
         });
     </script>
     <script src="assets/js/main.js"></script>

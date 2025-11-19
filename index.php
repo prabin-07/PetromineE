@@ -68,7 +68,7 @@ $logged_out = isset($_GET['logged_out']) && $_GET['logged_out'] === '1';
             <div class="container">
                 <h2>Nearby Fuel Stations</h2>
                 <div class="stations-grid" id="stationsGrid">
-                    <!-- Stations will be loaded here via JavaScript -->
+                    
                 </div>
             </div>
         </section>

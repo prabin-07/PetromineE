@@ -173,32 +173,6 @@ if (isset($_GET['registered']) && $_GET['registered'] === '1') {
                 Don't have an account? <a href="register.php" class="link-primary">Register here</a>
             </p>
             
-            <!-- Demo Credentials Helper -->
-            <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin-top: 20px; font-size: 0.9rem;">
-                <h4 style="margin: 0 0 10px 0; color: #333;">Demo Credentials:</h4>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                    <button type="button" class="demo-login" data-email="customer@demo.com" data-password="password123" 
-                            style="padding: 8px; border: 1px solid #ddd; background: white; border-radius: 4px; cursor: pointer;">
-                        <strong>Customer</strong><br>
-                        <small>customer@demo.com</small>
-                    </button>
-                    <button type="button" class="demo-login" data-email="owner@demo.com" data-password="password123"
-                            style="padding: 8px; border: 1px solid #ddd; background: white; border-radius: 4px; cursor: pointer;">
-                        <strong>Pump Owner</strong><br>
-                        <small>owner@demo.com</small>
-                    </button>
-                    <button type="button" class="demo-login" data-email="admin@demo.com" data-password="password123"
-                            style="padding: 8px; border: 1px solid #ddd; background: white; border-radius: 4px; cursor: pointer;">
-                        <strong>Admin</strong><br>
-                        <small>admin@demo.com</small>
-                    </button>
-                    <button type="button" class="demo-login" data-email="admin@petromine.com" data-password="password"
-                            style="padding: 8px; border: 1px solid #ddd; background: white; border-radius: 4px; cursor: pointer;">
-                        <strong>Super Admin</strong><br>
-                        <small>admin@petromine.com</small>
-                    </button>
-                </div>
-            </div>
         </div>
     </main>
 

@@ -3,12 +3,12 @@ require_once 'includes/session.php';
 require_once 'config/database.php';
 require_once 'includes/auth.php';
 
-// Require admin role to access this page
+// Require admin role 
 requireRole('admin');
 
 $user = getCurrentUser();
 
-// Get system statistics
+//system statistics
 try {
     // Total users
     $stmt = $db->query("SELECT COUNT(*) as total_users FROM users");
@@ -174,7 +174,7 @@ try {
                                             <td style="padding: 12px; border-bottom: 1px solid #dee2e6;">
                                                 <span class="service-tag" style="background: 
                                                     <?php echo $transaction['status'] === 'active' ? '#28a745' : 
-                                                              ($transaction['status'] === 'redeemed' ? '#007bff' : '#6c757d'); ?>; 
+                                                            ($transaction['status'] === 'redeemed' ? '#007bff' : '#6c757d'); ?>; 
                                                     color: white;">
                                                     <?php echo ucfirst($transaction['status']); ?>
                                                 </span>
@@ -186,41 +186,6 @@ try {
                                     <?php endforeach; ?>
                                 </tbody>
                             </table>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Quick Actions -->
-                <section style="margin: 3rem 0;">
-                    <h2><i class="fas fa-tools"></i> Quick Actions</h2>
-                    <div class="stations-grid">
-                        <div class="station-card" style="text-align: center;">
-                            <h3><i class="fas fa-users-cog"></i> User Management</h3>
-                            <p>Manage user accounts and permissions</p>
-                            <button class="btn btn-primary" onclick="alert('User management feature coming soon!')">
-                                Manage Users
-                            </button>
-                        </div>
-                        <div class="station-card" style="text-align: center;">
-                            <h3><i class="fas fa-gas-pump"></i> Station Management</h3>
-                            <p>Monitor and manage fuel stations</p>
-                            <button class="btn btn-primary" onclick="alert('Station management feature coming soon!')">
-                                Manage Stations
-                            </button>
-                        </div>
-                        <div class="station-card" style="text-align: center;">
-                            <h3><i class="fas fa-chart-bar"></i> Analytics</h3>
-                            <p>View detailed platform analytics</p>
-                            <button class="btn btn-primary" onclick="alert('Analytics dashboard coming soon!')">
-                                View Analytics
-                            </button>
-                        </div>
-                        <div class="station-card" style="text-align: center;">
-                            <h3><i class="fas fa-cog"></i> System Settings</h3>
-                            <p>Configure platform settings</p>
-                            <button class="btn btn-primary" onclick="alert('System settings coming soon!')">
-                                Settings
-                            </button>
                         </div>
                     </div>
                 </section>
