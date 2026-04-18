@@ -18,6 +18,41 @@ if (hasRole('admin')) {
 
 try {
     $user_id = getCurrentUser()['id'];
+    $user = getCurrentUser();
+
+    // Pump owner stats
+    if ($user['role'] === 'pump_owner') {
+        $totalStationsStmt = $db->prepare("SELECT COUNT(*) FROM fuel_stations WHERE owner_id = :uid");
+        $totalStationsStmt->execute([':uid' => $user_id]);
+        $total_stations = $totalStationsStmt->fetchColumn();
+
+        $todaysSalesStmt = $db->prepare("
+            SELECT COALESCE(SUM(stb.total_amount), 0)
+            FROM save_to_buy stb
+            JOIN fuel_stations fs ON stb.station_id = fs.id
+            WHERE fs.owner_id = :uid AND DATE(stb.created_at) = CURDATE()
+        ");
+        $todaysSalesStmt->execute([':uid' => $user_id]);
+        $todays_sales = $todaysSalesStmt->fetchColumn();
+
+        $activeLocksStmt = $db->prepare("
+            SELECT COUNT(*) FROM save_to_buy stb
+            JOIN fuel_stations fs ON stb.station_id = fs.id
+            WHERE fs.owner_id = :uid AND stb.status = 'active' AND stb.expiry_date > NOW()
+        ");
+        $activeLocksStmt->execute([':uid' => $user_id]);
+        $active_locks = $activeLocksStmt->fetchColumn();
+
+        echo json_encode([
+            'total_stations' => (int)$total_stations,
+            'todays_sales' => number_format($todays_sales, 2),
+            'active_locks' => (int)$active_locks
+        ]);
+        exit();
+    }
+
+try {
+    $user_id = getCurrentUser()['id'];
     
     // Get total savings (difference between locked price and current price for redeemed purchases)
     $savingsQuery = "

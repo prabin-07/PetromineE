@@ -74,7 +74,7 @@ try {
         <div class="dashboard">
             <div class="container">
                 <div class="dashboard-header">
-                    <h1><i class="fas fa-shield-alt"></i> System Administration</h1>
+                    <h1><i class="fas fa-shield-alt"></i> Admin Dashboard+</h1>
                     <p>Manage users, stations, and monitor platform activity</p>
                 </div>
 
@@ -192,5 +192,6 @@ try {
             </div>
         </div>
     </main>
+    <script src="assets/js/alerts.js"></script>
 </body>
 </html>

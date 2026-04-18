@@ -70,6 +70,27 @@ if ($_POST) {
                     }
                 }
                 break;
+
+            case 'toggle_status':
+                $station_id = (int)$_POST['station_id'];
+                $verifyQuery = "SELECT id, is_active FROM fuel_stations WHERE id = :station_id AND owner_id = :owner_id";
+                $verifyStmt = $db->prepare($verifyQuery);
+                $verifyStmt->bindParam(':station_id', $station_id);
+                $verifyStmt->bindParam(':owner_id', $user_id);
+                $verifyStmt->execute();
+                $stationRow = $verifyStmt->fetch(PDO::FETCH_ASSOC);
+                if ($stationRow) {
+                    $newStatus = $stationRow['is_active'] ? 0 : 1;
+                    $toggleQuery = "UPDATE fuel_stations SET is_active = :status WHERE id = :station_id";
+                    $toggleStmt = $db->prepare($toggleQuery);
+                    $toggleStmt->bindParam(':status', $newStatus);
+                    $toggleStmt->bindParam(':station_id', $station_id);
+                    $toggleStmt->execute();
+                    $message = 'Station ' . ($newStatus ? 'activated' : 'deactivated') . ' successfully!';
+                } else {
+                    $error = 'Station not found or access denied';
+                }
+                break;
         }
     }
 }
@@ -214,6 +235,16 @@ $stations = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                     Update
                                 </button>
                             </div>
+                        </form>
+                        
+                        <!-- Toggle Station Status -->
+                        <form method="POST" style="margin-top: 0.75rem;">
+                            <input type="hidden" name="action" value="toggle_status">
+                            <input type="hidden" name="station_id" value="<?php echo $station['id']; ?>">
+                            <button type="submit" class="btn <?php echo $station['is_active'] ? 'btn-secondary' : 'btn-primary'; ?>" style="width: 100%; font-size: 0.9rem; padding: 8px;">
+                                <i class="fas fa-<?php echo $station['is_active'] ? 'pause' : 'play'; ?>"></i>
+                                <?php echo $station['is_active'] ? 'Deactivate Station' : 'Activate Station'; ?>
+                            </button>
                         </form>
                     </div>
                 <?php endforeach; ?>

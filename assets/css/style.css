@@ -679,7 +679,7 @@
 
 /* Enhanced Form Validation */
 .form-control.is-valid {
-    border-color: #28a745;
+    border-color: #a7284c;
     box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
 }
 
@@ -722,7 +722,7 @@
 }
 
 .stat-card {
-    background: white;
+    background: rgb(255, 255, 255);
     padding: 2rem;
     border-radius: 15px;
     box-shadow: 0 5px 20px rgba(0,0,0,0.1);
@@ -760,7 +760,7 @@
 	}
 
 .stat-label {
-    color: #666;
+    color: #180e0e;
     font-weight: 500;
 }
 

@@ -26,6 +26,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error = 'Please enter a valid email address';
     } else {
         try {
+            // Create password_resets table if it doesn't exist
+            $db->exec("CREATE TABLE IF NOT EXISTS password_resets (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                email VARCHAR(100) NOT NULL,
+                token VARCHAR(64) NOT NULL,
+                expires_at DATETIME NOT NULL,
+                used TINYINT(1) DEFAULT 0,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                UNIQUE KEY idx_token (token),
+                KEY idx_email (email)
+            )");
+
             // Check if email exists
             $query = "SELECT id, username FROM users WHERE email = :email";
             $stmt = $db->prepare($query);
@@ -35,23 +47,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($stmt->rowCount() > 0) {
                 $user = $stmt->fetch(PDO::FETCH_ASSOC);
                 
+                // Delete any existing tokens for this email
+                $db->prepare("DELETE FROM password_resets WHERE email = :email")->execute([':email' => $email]);
+                
                 // Generate reset token
                 $reset_token = bin2hex(random_bytes(32));
                 $expires_at = date('Y-m-d H:i:s', strtotime('+1 hour'));
                 
-                // Store reset token in database (you would need to create this table)
-                // For demo purposes, we'll just show a success message
-                $success = 'If an account with that email exists, you will receive password reset instructions shortly.';
+                // Store reset token
+                $insertToken = $db->prepare("INSERT INTO password_resets (email, token, expires_at) VALUES (:email, :token, :expires_at)");
+                $insertToken->execute([':email' => $email, ':token' => $reset_token, ':expires_at' => $expires_at]);
                 
-                // In a real application, you would:
-                // 1. Store the reset token in a password_resets table
-                // 2. Send an email with the reset link
-                // 3. Create a reset-password.php page to handle the token
+                // Build reset link
+                $reset_link = (isset($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']) . '/reset-password.php?token=' . $reset_token;
                 
-            } else {
-                // Don't reveal if email exists or not for security
-                $success = 'If an account with that email exists, you will receive password reset instructions shortly.';
+                // Store in session for demo (in production, send via email)
+                $_SESSION['demo_reset_link'] = $reset_link;
+                $_SESSION['demo_reset_user'] = $user['username'];
             }
+            
+            // Always show same message for security
+            $success = 'If an account with that email exists, you will receive password reset instructions shortly.';
+            
         } catch (PDOException $e) {
             error_log("Forgot password error: " . $e->getMessage());
             $error = 'An error occurred. Please try again later.';
@@ -99,6 +116,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
             <?php if ($success): ?>
                 <div class="alert alert-success"><?php echo $success; ?></div>
+                <?php if (isset($_SESSION['demo_reset_link'])): ?>
+                <div style="background: #fff3cd; padding: 15px; border-radius: 8px; margin-top: 1rem; font-size: 0.9rem;">
+                    <strong style="color: #856404;">Demo Mode - Reset Link:</strong><br>
+                    <a href="<?php echo htmlspecialchars($_SESSION['demo_reset_link']); ?>" style="word-break: break-all; color: #0d6efd;">
+                        <?php echo htmlspecialchars($_SESSION['demo_reset_link']); ?>
+                    </a>
+                    <p style="margin: 0.5rem 0 0; color: #856404; font-size: 0.85rem;">In production, this link would be sent to the user's email.</p>
+                </div>
+                <?php unset($_SESSION['demo_reset_link'], $_SESSION['demo_reset_user']); ?>
+                <?php endif; ?>
                 <div style="text-align: center; margin-top: 2rem;">
                     <a href="login.php" class="btn btn-primary">Back to Login</a>
                 </div>

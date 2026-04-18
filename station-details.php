@@ -494,22 +494,33 @@ function calculateDistance($lat1, $lon1, $lat2 = 40.7128, $lon2 = -74.0060) {
                 <section>
                     <h2><i class="fas fa-map-marked-alt"></i> Location & Directions</h2>
                     <div class="map-container">
+                        <?php if ($station['latitude'] && $station['longitude']): ?>
+                        <iframe
+                            width="100%"
+                            height="300"
+                            style="border:0; border-radius: 10px;"
+                            loading="lazy"
+                            allowfullscreen
+                            src="https://maps.google.com/maps?q=<?php echo (float)$station['latitude']; ?>,<?php echo (float)$station['longitude']; ?>&z=15&output=embed">
+                        </iframe>
+                        <?php else: ?>
                         <div class="mock-map">
                             <div>
                                 <i class="fas fa-map-marker-alt" style="font-size: 2rem; margin-bottom: 1rem; color: #27AE60;"></i>
-                                <p>Interactive Map Coming Soon</p>
-                                <p style="font-size: 0.9rem; opacity: 0.7;">
-                                    Coordinates: <?php echo $station['latitude']; ?>, <?php echo $station['longitude']; ?>
-                                </p>
+                                <p>Map not available</p>
+                                <p style="font-size: 0.9rem; opacity: 0.7;"><?php echo htmlspecialchars($station['address']); ?></p>
                             </div>
                         </div>
-                        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                        <?php endif; ?>
+                        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1rem;">
                             <button class="btn btn-primary" onclick="getDirections()">
                                 <i class="fas fa-directions"></i> Get Directions
                             </button>
+                            <?php if ($station['phone']): ?>
                             <button class="btn btn-secondary" onclick="callStation()">
                                 <i class="fas fa-phone"></i> Call Station
                             </button>
+                            <?php endif; ?>
                             <button class="btn btn-secondary" onclick="reportIssue()">
                                 <i class="fas fa-flag"></i> Report Issue
                             </button>
@@ -582,18 +593,17 @@ function calculateDistance($lat1, $lon1, $lat2 = 40.7128, $lon2 = -74.0060) {
     <script src="assets/js/alerts.js"></script>
     <script>
         function getDirections() {
+            const lat = <?php echo (float)($station['latitude'] ?? 0); ?>;
+            const lng = <?php echo (float)($station['longitude'] ?? 0); ?>;
             const address = "<?php echo addslashes($station['address'] ?? ''); ?>";
-            showToast('Opening directions in your default map app...', 'info', 'Navigation');
             
-            // In a real app, this would open the user's preferred map app
-            setTimeout(() => {
-                showToast('Feature coming soon! Address copied to clipboard.', 'info', 'Coming Soon');
-                
-                // Copy address to clipboard
-                if (navigator.clipboard) {
-                    navigator.clipboard.writeText(address);
-                }
-            }, 1000);
+            if (lat && lng) {
+                window.open(`https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`, '_blank');
+            } else if (address) {
+                window.open(`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`, '_blank');
+            } else {
+                showToast('Location not available for this station.', 'warning', 'No Location');
+            }
         }
         
         function shareStation() {
@@ -615,22 +625,23 @@ function calculateDistance($lat1, $lon1, $lat2 = 40.7128, $lon2 = -74.0060) {
         }
         
         function callStation() {
-            const phone = "<?php echo $station['phone'] ?? ''; ?>";
+            const phone = "<?php echo htmlspecialchars($station['phone'] ?? ''); ?>";
             if (phone) {
                 window.location.href = `tel:${phone}`;
             } else {
-                showToast('Phone number not available for this station', 'warning', 'No Contact');
+                showToast('Phone number not available for this station.', 'warning', 'No Contact');
             }
         }
         
         function reportIssue() {
             showConfirm({
                 title: 'Report an Issue',
-                message: 'What type of issue would you like to report about this station?',
-                confirmText: 'Continue',
+                message: 'Are you sure you want to report an issue with this station? Our team will review it.',
+                confirmText: 'Submit Report',
                 cancelText: 'Cancel',
+                type: 'warning',
                 onConfirm: () => {
-                    showToast('Thank you for your report. We will investigate this issue.', 'success', 'Report Submitted');
+                    showToast('Thank you for your report. We will investigate this issue shortly.', 'success', 'Report Submitted');
                 }
             });
         }
@@ -639,15 +650,14 @@ function calculateDistance($lat1, $lon1, $lat2 = 40.7128, $lon2 = -74.0060) {
             <?php if (!isLoggedIn()): ?>
                 showConfirm({
                     title: 'Login Required',
-                    message: 'You need to login to write a review. Would you like to go to the login page?',
+                    message: 'You need to login to write a review.',
                     confirmText: 'Login',
                     cancelText: 'Cancel',
-                    onConfirm: () => {
-                        window.location.href = 'login.php';
-                    }
+                    type: 'info',
+                    onConfirm: () => { window.location.href = 'login.php'; }
                 });
             <?php else: ?>
-                showToast('Review feature coming soon! Thank you for your interest.', 'info', 'Coming Soon');
+                showToast('Review feature coming soon!', 'info', 'Coming Soon');
             <?php endif; ?>
         }
         

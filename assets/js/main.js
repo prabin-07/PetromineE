@@ -160,10 +160,25 @@ async function loadUserStats() {
     try {
         const response = await fetch('api/user-stats.php');
         const stats = await response.json();
-        
-        document.getElementById('totalSavings').textContent = '₹' + stats.total_savings;
-        document.getElementById('activeLocks').textContent = stats.active_locks;
-        document.getElementById('totalPurchases').textContent = stats.total_purchases;
+
+        // Customer stats
+        if (document.getElementById('totalSavings')) {
+            document.getElementById('totalSavings').textContent = '₹' + (stats.total_savings || '0.00');
+        }
+        if (document.getElementById('activeLocks')) {
+            document.getElementById('activeLocks').textContent = stats.active_locks || 0;
+        }
+        if (document.getElementById('totalPurchases')) {
+            document.getElementById('totalPurchases').textContent = stats.total_purchases || 0;
+        }
+
+        // Pump owner stats
+        if (document.getElementById('totalStations')) {
+            document.getElementById('totalStations').textContent = stats.total_stations || 0;
+        }
+        if (document.getElementById('todaysSales')) {
+            document.getElementById('todaysSales').textContent = '₹' + (stats.todays_sales || '0.00');
+        }
     } catch (error) {
         console.error('Error loading user stats:', error);
     }
@@ -178,6 +193,19 @@ async function loadSavedPurchases() {
         if (!container) return;
         
         container.innerHTML = '';
+        
+        if (!purchases.length) {
+            container.innerHTML = `
+                <div class="station-card" style="text-align: center; grid-column: 1 / -1; padding: 3rem;">
+                    <i class="fas fa-lock" style="font-size: 3rem; color: #ccc; margin-bottom: 1rem;"></i>
+                    <h3 style="color: #666;">No saved purchases yet</h3>
+                    <p style="color: #999; margin-bottom: 1.5rem;">Lock in fuel prices to save money on future purchases.</p>
+                    <a href="index.php" class="btn btn-primary">
+                        <i class="fas fa-gas-pump"></i> Browse Stations
+                    </a>
+                </div>`;
+            return;
+        }
         
         purchases.forEach(purchase => {
             const purchaseCard = createPurchaseCard(purchase);

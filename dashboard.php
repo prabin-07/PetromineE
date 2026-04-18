@@ -32,7 +32,7 @@ $admin_fuel_restriction = isset($_GET['error']) && $_GET['error'] === 'admin_no_
                 <h2><i class="fas fa-gas-pump"></i> Petromine</h2>
             </div>
             <div class="nav-menu">
-                <a href="index.php" class="nav-link"></a>
+                <a href="index.php" class="nav-link">Home</a>
                 <?php if ($user_role == 'pump_owner'): ?>
                     <a href="manage-station.php" class="nav-link">Manage Station</a>
                 <?php elseif ($user_role == 'admin'): ?>
